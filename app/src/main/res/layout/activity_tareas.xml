@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/rojo_claro">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mis tareas"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/rojo_oscuro"/>
+
+    <Button
+        android:id="@+id/btnNuevaTarea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="+ NUEVA TAREA"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/rojo_principal"
+        android:textColor="@color/blanco"/>
+
+    <ListView
+        android:id="@+id/listaTareas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

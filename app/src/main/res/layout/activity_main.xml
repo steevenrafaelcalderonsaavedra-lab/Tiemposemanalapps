@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/rojo_claro">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MiTiempoSemanal"
+            android:textAlignment="center"
+            android:textColor="@color/rojo_oscuro"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="60dp"/>
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="30dp"
+            android:src="@mipmap/ic_launcher"
+            android:contentDescription="Logo MiTiempoSemanal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Organiza tu tiempo, mejora tu día"
+            android:textSize="16sp"
+            android:textColor="@color/gris_texto"
+            android:gravity="center"
+            android:layout_marginTop="18dp"/>
+
+        <TextView
+            android:id="@+id/txtVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Steeven Calderon · v0.1.0 (1)"
+            android:textColor="@color/rojo_oscuro"
+            android:textSize="14sp"
+            android:layout_marginTop="14dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PANEL PRINCIPAL"
+            android:textColor="@color/rojo_oscuro"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/btnCategorias"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="GESTIONAR CATEGORÍAS"
+            android:textColor="@color/blanco"
+            android:textStyle="bold"
+            android:backgroundTint="@color/rojo_principal"/>
+
+        <Button
+            android:id="@+id/btnTareas"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="GESTIONAR TAREAS"
+            android:textColor="@color/blanco"
+            android:textStyle="bold"
+            android:backgroundTint="@color/rojo_principal"/>
+
+
+    </LinearLayout>
+</ScrollView>
+
