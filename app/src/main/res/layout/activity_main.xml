@@ -76,6 +76,16 @@
             android:textStyle="bold"
             android:backgroundTint="@color/rojo_principal"/>
 
+        <Button
+            android:id="@+id/btnEventos"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginTop="18dp"
+            android:text="REGISTRAR EVENTOS"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#B71C1C"/>
+
 
     </LinearLayout>
 </ScrollView>

@@ -45,5 +45,10 @@ class MainActivity : AppCompatActivity() {
             )
             startActivity(intent)
         }
+        findViewById<Button>(R.id.btnEventos).setOnClickListener {
+            startActivity(
+                Intent(this, EventosActivity::class.java)
+            )
+        }
     }
 }

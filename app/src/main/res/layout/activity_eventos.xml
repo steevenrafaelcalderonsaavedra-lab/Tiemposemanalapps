@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFEBEE">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registro de Eventos"
+            android:textColor="#7F1D1D"
+            android:textStyle="bold"
+            android:textSize="27sp"
+            android:gravity="center"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Organiza y registra tu tiempo"
+            android:textColor="#757575"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_marginBottom="25dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buscar o crear tarea"
+            android:textColor="#7F1D1D"
+            android:textStyle="bold"
+            android:textSize="17sp"/>
+
+        <EditText
+            android:id="@+id/etBuscarTarea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Escribe el nombre de la tarea"
+            android:inputType="textCapSentences"
+            android:singleLine="true"
+            android:layout_marginTop="8dp"/>
+
+        <ListView
+            android:id="@+id/listaResultados"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#FFFFFF"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/txtCategoriaSeleccionada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Categoría: ninguna"
+            android:textColor="#7F1D1D"
+            android:textSize="15sp"
+            android:layout_marginTop="15dp"/>
+
+        <Button
+            android:id="@+id/btnIniciarEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="▶ INICIAR EVENTO"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#B71C1C"
+            android:layout_marginTop="22dp"/>
+
+        <Button
+            android:id="@+id/btnFinalizarEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="■ FINALIZAR EVENTO"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#7F1D1D"
+            android:enabled="false"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/txtEventoActivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No hay eventos en curso"
+            android:textColor="#7F1D1D"
+            android:textSize="15sp"
+            android:padding="16dp"
+            android:background="#FFFFFF"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Historial de eventos"
+            android:textColor="#7F1D1D"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="12dp"/>
+
+        <LinearLayout
+            android:id="@+id/contenedorHistorial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+    </LinearLayout>
+</ScrollView>
