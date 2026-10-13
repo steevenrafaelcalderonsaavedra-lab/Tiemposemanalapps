@@ -1,5 +1,10 @@
 package com.senati.mitiemposemanal1
-
+import android.graphics.Color
+import android.widget.ProgressBar
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.temporal.TemporalAdjusters
+import java.util.Locale
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
@@ -21,7 +26,8 @@ class EventosActivity : AppCompatActivity() {
     private lateinit var btnIniciar: Button
     private lateinit var btnFinalizar: Button
     private lateinit var contenedorHistorial: LinearLayout
-
+    private lateinit var txtRangoSemana: TextView
+    private lateinit var contenedorResumen: LinearLayout
     private var tareaSeleccionada: Tarea? = null
     private var resultados = listOf<Tarea>()
 
@@ -31,7 +37,8 @@ class EventosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_eventos)
-
+        txtRangoSemana = findViewById(R.id.txtRangoSemana)
+        contenedorResumen = findViewById(R.id.contenedorResumen)
         db = DatabaseHelper(this)
 
         etBuscarTarea = findViewById(R.id.etBuscarTarea)
@@ -395,6 +402,7 @@ class EventosActivity : AppCompatActivity() {
         }
 
         mostrarHistorial()
+        mostrarResumenSemanal()
     }
 
     // ==========================================
@@ -495,4 +503,138 @@ class EventosActivity : AppCompatActivity() {
         }
         super.onDestroy()
     }
+
+    private fun mostrarResumenSemanal() {
+
+        val hoy = LocalDate.now()
+
+        // La semana comienza el lunes
+        val lunes = hoy.with(
+            TemporalAdjusters.previousOrSame(
+                DayOfWeek.MONDAY
+            )
+        )
+
+        val domingo = lunes.plusDays(6)
+
+        val inicio = lunes.atStartOfDay()
+        val siguienteLunes = lunes.plusDays(7).atStartOfDay()
+
+        val formato = DateTimeFormatter.ofPattern(
+            "dd/MM/yyyy"
+        )
+
+        txtRangoSemana.text =
+            "Semana ${lunes.format(formato)} – " +
+                    domingo.format(formato)
+
+        val resumen = db.obtenerResumenSemanal(
+            inicio.toString(),
+            siguienteLunes.toString()
+        )
+
+        contenedorResumen.removeAllViews()
+
+        val segundosSemana = 7L * 24 * 60 * 60
+
+        var segundosRegistrados = 0L
+
+        resumen.forEach { categoria ->
+
+            segundosRegistrados += categoria.segundos
+
+            agregarFilaResumen(
+                categoria.categoria,
+                categoria.segundos,
+                segundosSemana,
+                Color.parseColor("#B71C1C")
+            )
+        }
+
+        val sinRegistrar =
+            (segundosSemana - segundosRegistrados)
+                .coerceAtLeast(0L)
+
+        agregarFilaResumen(
+            "Sin registrar",
+            sinRegistrar,
+            segundosSemana,
+            Color.parseColor("#9E9E9E")
+        )
+    }
+
+
+// ==========================================
+// CREAR FILAS DINÁMICAMENTE
+// ==========================================
+
+    private fun agregarFilaResumen(
+        nombre: String,
+        segundos: Long,
+        segundosSemana: Long,
+        color: Int
+    ) {
+
+        val porcentaje =
+            segundos.toDouble() / segundosSemana * 100.0
+
+        val porcentajeTexto = String.format(
+            Locale.US,
+            "%.1f",
+            porcentaje
+        )
+
+        val horas = segundos / 3600
+        val minutos = (segundos % 3600) / 60
+
+        val fila = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(0, 10, 0, 18)
+        }
+
+        val texto = TextView(this).apply {
+            text = "$nombre: ${horas}h ${minutos}m" +
+                    "  ($porcentajeTexto %)"
+            textSize = 14f
+            setTextColor(
+                Color.parseColor("#7F1D1D")
+            )
+        }
+
+        val barra = ProgressBar(
+            this,
+            null,
+            android.R.attr.progressBarStyleHorizontal
+        ).apply {
+
+            max = 1000
+
+            progress = (
+                    porcentaje.coerceIn(0.0, 100.0) * 10
+                    ).toInt()
+
+            progressTintList =
+                android.content.res.ColorStateList.valueOf(
+                    color
+                )
+
+            progressBackgroundTintList =
+                android.content.res.ColorStateList.valueOf(
+                    Color.parseColor("#FFCDD2")
+                )
+        }
+
+        fila.addView(texto)
+
+        fila.addView(
+            barra,
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                24
+            )
+        )
+
+        contenedorResumen.addView(fila)
+    }
+
 }

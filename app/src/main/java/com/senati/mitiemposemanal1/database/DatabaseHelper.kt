@@ -25,6 +25,11 @@ data class Evento(
     val fin: String?,
     val duracionSegundos: Long?
 )
+data class ResumenCategoria(
+    val categoriaId: Int,
+    val categoria: String,
+    val segundos: Long
+)
 class DatabaseHelper(context: Context) :
     SQLiteOpenHelper(context, "MiTiempo.db", null, 2) {
 
@@ -477,4 +482,52 @@ class DatabaseHelper(context: Context) :
             arrayOf(id.toString())
         ) > 0
     }
+
+    fun obtenerResumenSemanal(
+        inicioSemana: String,
+        inicioSemanaSiguiente: String
+    ): List<ResumenCategoria> {
+
+        val lista = mutableListOf<ResumenCategoria>()
+
+        val sql = """
+        SELECT
+            c.id,
+            c.nombre,
+            COALESCE(
+                SUM(e.duracion_segundos),
+                0
+            ) AS total_segundos
+        FROM categorias c
+        LEFT JOIN tareas t
+            ON t.categoria_id = c.id
+        LEFT JOIN eventos e
+            ON e.tarea_id = t.id
+            AND e.fin IS NOT NULL
+            AND e.inicio >= ?
+            AND e.inicio < ?
+        GROUP BY c.id, c.nombre
+        ORDER BY c.id
+    """.trimIndent()
+
+        readableDatabase.rawQuery(
+            sql,
+            arrayOf(inicioSemana, inicioSemanaSiguiente)
+        ).use { cursor ->
+
+            while (cursor.moveToNext()) {
+
+                lista.add(
+                    ResumenCategoria(
+                        categoriaId = cursor.getInt(0),
+                        categoria = cursor.getString(1),
+                        segundos = cursor.getLong(2)
+                    )
+                )
+            }
+        }
+
+        return lista
+    }
+
 }
