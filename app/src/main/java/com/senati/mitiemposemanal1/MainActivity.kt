@@ -50,5 +50,11 @@ class MainActivity : AppCompatActivity() {
                 Intent(this, EventosActivity::class.java)
             )
         }
+        findViewById<Button>(R.id.btnReportes).setOnClickListener {
+            startActivity(
+                Intent(this, ReportesActivity::class.java)
+            )
+        }
     }
+
 }

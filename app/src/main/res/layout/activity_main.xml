@@ -43,7 +43,7 @@
             android:id="@+id/txtVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Steeven Calderon · v0.1.0 (1)"
+            android:text="Steeven Calderon · v1.0.0"
             android:textColor="@color/rojo_oscuro"
             android:textSize="14sp"
             android:layout_marginTop="14dp"/>
@@ -82,6 +82,16 @@
             android:layout_height="65dp"
             android:layout_marginTop="18dp"
             android:text="REGISTRAR EVENTOS"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#B71C1C"/>
+
+        <Button
+            android:id="@+id/btnReportes"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginTop="18dp"
+            android:text="CONSULTAR REPORTES"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:backgroundTint="#B71C1C"/>
